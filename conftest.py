@@ -1,7 +1,7 @@
 import pytest
 
 from selenium import webdriver
-
+from pages.app import Application
 
 def pytest_addoption(parser):
     parser.addoption("--maximized", action="store_true", help="Maximize browser window")
@@ -43,3 +43,11 @@ def browser(request):
 @pytest.fixture
 def base_url(request):
     return request.config.getoption("--url")
+
+
+@pytest.fixture(scope='module')
+def app(browser):
+    return Application(browser)
+
+#@pytest.fixture(scope='module')
+#def open_main_page(app):
